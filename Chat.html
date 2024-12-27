@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои коктейли</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #000000;
+        }
+
+        .header .logo {
+            width: 50px;
+            height: 50px;
+            background: url('./images/logo2.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .header .settings {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .chat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            margin: 10px auto 10px 10px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 10px;
+            position: relative;
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background-color: #555;
+            margin: 10px 10px 10px auto;
+        }
+
+        .message .name {
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #222;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            background: #222;
+        }
+
+        .footer img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (max-width: 360px) {
+            .input-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .input-container button {
+                margin: 10px 0 0 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <img src="./pics/settings.svg" style="height: 50px;">
+    </div>
+    <div style="text-align: center;"><h2>Чат 1</h2></div>
+    <div class="container">
+        <div class="chat" id="chat-container">
+            <div class="message">
+                <div class="name">Виктор</div>
+                Сегодня у нас банкет
+            </div>
+            <div class="message">
+                <div class="name">Оля</div>
+                Никто не видел где джин
+            </div>
+            <div class="message">
+                <div class="name">Слава</div>
+                Не смогу прийти заболел :(
+            </div>
+            <div class="message">
+                <div class="name">Михаил</div>
+                Сегодня уйду раньше на час
+            </div>
+            <div class="message user">
+                <div class="name">Вы</div>
+                В пятницу проверка
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <input type="text" id="chat-input" placeholder="Введите сообщение">
+        <button onclick="sendMessage()">Отправить</button>
+    </div>
+
+    <div class="footer">
+        <a href="index.html"><img src="./images/cocktail.png" alt="Cocktail"></a>
+        <a href="calendar.html"><img src="./images/calendar.png" alt="Calendar"></a>
+        <a href="finance.html"><img src="./images/ruble.png" alt="Finance"></a>
+        <a href="message.html"><img src="./images/message.png" alt="Messages"></a>
+        <a href="notes.html"><img src="./images/note.png" alt="Notes"></a>
+        <a href="favorites.html"><img src="./images/favorite.png" alt="Favorites"></a>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const chatContainer = document.getElementById('chat-container');
+            const messageText = input.value.trim();
+
+            if (messageText) {
+                const message = document.createElement('div');
+                message.className = 'message user';
+
+                const name = document.createElement('div');
+                name.className = 'name';
+                name.textContent = 'Вы';
+
+                const text = document.createTextNode(messageText);
+
+                message.appendChild(name);
+                message.appendChild(text);
+                chatContainer.appendChild(message);
+
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
