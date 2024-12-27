@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить коктейль</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            font-size: 24px;
+        }
+        .header .logo {
+            width: 50px;
+            height: 50px;
+            background: url('./pics/лого.svg') no-repeat center center;
+            background-size: contain;
+        }
+        .settings {
+            height: 50px;
+        }
+        .container {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        h2 {
+            text-align: center;
+            color: rgb(255, 255, 255);
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .input-field, .button-group {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .input-field input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: 1px solid orange;
+            border-radius: 5px;
+            background: none;
+            color: orange;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .button.selected {
+            background: orange;
+            color: black;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            background: #222;
+        }
+
+        .footer img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <div id="datetime"></div>
+        <img src="./pics/settings.svg" alt="Настройки" class="settings">
+    </div>
+    <div class="container">
+        <h2>Добавить коктейль</h2>
+        <div class="section">
+            <div class="section-title">Название</div>
+            <div class="input-field">
+                <input type="text" id="name" placeholder="Введите название коктейля">
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Ингредиенты</div>
+            <div class="button-group" id="ingredients">
+                <button class="button">Виски</button>
+                <button class="button">Водка</button>
+                <button class="button">Джин</button>
+                <button class="button">Вино</button>
+                <button class="button">Ром</button>
+                <button class="button">Текила</button>
+                <button class="button">Абсент</button>
+                <button class="button">Апельсиновый сок</button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Вкус</div>
+            <div class="button-group" id="taste">
+                <button class="button">Кислый</button>
+                <button class="button">Сладкий</button>
+                <button class="button">Горький</button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Объем</div>
+            <div class="button-group" id="volume">
+                <button class="button">Лонг дринк</button>
+                <button class="button">Шорт дринк</button>
+                <button class="button">Шот</button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Описание</div>
+            <div class="input-field">
+                <input type="text" id="description" placeholder="Введите описание">
+            </div>
+        </div>
+        <button class="submit-button" id="add-cocktail">Добавить коктейль</button>
+    </div>
+    <div class="footer">
+        <a href="index.html"><img src="./images/cocktail.png" alt="Cocktail"></a>
+        <a href="calendar.html"><img src="./images/calendar.png" alt="Calendar"></a>
+        <a href="finance.html"><img src="./images/ruble.png" alt="Finance"></a>
+        <a href="message.html"><img src="./images/message.png" alt="Messages"></a>
+        <a href="notes.html"><img src="./images/note.png" alt="Notes"></a>
+        <a href="favorites.html"><img src="./images/favorite.png" alt="Favorites"></a>
+    </div>
+    </div>
+    <script>
+
+        // Логика выбора кнопок
+        document.querySelectorAll('.button-group').forEach(group => {
+            group.addEventListener('click', (e) => {
+                if (e.target.classList.contains('button')) {
+                    if (group.id === 'ingredients') {
+                        e.target.classList.toggle('selected');
+                    } else {
+                        group.querySelectorAll('.button').forEach(button => button.classList.remove('selected'));
+                        e.target.classList.add('selected');
+                    }
+                }
+            });
+        });
+
+        // Логика добавления коктейля
+        document.getElementById('add-cocktail').addEventListener('click', () => {
+            alert('Коктейль добавлен');
+        });
+    </script>
+</body>
+</html>
